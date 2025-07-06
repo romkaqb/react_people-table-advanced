@@ -1,19 +1,46 @@
-export const PeopleFilters = () => {
+import classNames from "classnames";
+import React from "react";
+
+type Props = {
+  query: string;
+  handleFilterByQuery: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleFilterBySex: (value: string | null) => void ;
+  searchParams: URLSearchParams;
+}
+
+export const PeopleFilters: React.FC<Props> = ({
+  query,
+  handleFilterByQuery,
+  handleFilterBySex,
+  searchParams,
+}) => {
+
   return (
     <nav className="panel">
       <p className="panel-heading">Filters</p>
 
       <p className="panel-tabs" data-cy="SexFilter">
-        <a className="is-active" href="#/people">
+
+        <button
+          onClick={() => handleFilterBySex(null)}
+          className={classNames({ 'is-active': !searchParams.get('sex') })}
+        >
           All
-        </a>
-        <a className="" href="#/people?sex=m">
+        </button>
+        <button
+          onClick={() => handleFilterBySex('m')}
+          className={classNames({ 'is-active': searchParams.get('sex') === 'm' })}
+        >
           Male
-        </a>
-        <a className="" href="#/people?sex=f">
+        </button>
+        <button
+          onClick={() => handleFilterBySex('f')}
+          className={classNames({ 'is-active': searchParams.get('sex') === 'f' })}
+        >
           Female
-        </a>
+        </button>
       </p>
+
 
       <div className="panel-block">
         <p className="control has-icons-left">
@@ -22,6 +49,8 @@ export const PeopleFilters = () => {
             type="search"
             className="input"
             placeholder="Search"
+            value={query}
+            onChange={handleFilterByQuery}
           />
 
           <span className="icon is-left">
