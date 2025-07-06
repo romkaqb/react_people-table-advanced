@@ -1,16 +1,15 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { useParams } from "react-router-dom";
-import { Person } from "../types";
-import React from "react";
-import classNames from "classnames";
-import { PersonLink } from "./PersonLink";
-
+import { useParams } from 'react-router-dom';
+import { Person } from '../types';
+import React from 'react';
+import classNames from 'classnames';
+import { PersonLink } from './PersonLink';
 
 type Props = {
-  people: Person[]
-}
+  people: Person[];
+};
 
-export const PeopleTable: React.FC<Props> = ({ people, }) => {
+export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug } = useParams();
 
   return (

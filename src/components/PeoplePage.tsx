@@ -13,8 +13,8 @@ export const PeoplePage = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') || '';
-  const sex = searchParams.get('?sex') || '';
-  const centuries = searchParams.get('centuries') || '';
+  // const sex = searchParams.get('?sex') || '';
+  // const centuries = searchParams.get('centuries') || '';
 
   useEffect(() => {
     setIsLoading(true);
@@ -39,16 +39,16 @@ export const PeoplePage = () => {
   }, []);
 
   const handleFilterByQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams);
 
-      if (event.target.value) {
-        params.set('query', event.target.value)
-      } else {
-        params.delete('query')
-      }
-
-      setSearchParams(params)
+    if (event.target.value) {
+      params.set('query', event.target.value);
+    } else {
+      params.delete('query');
     }
+
+    setSearchParams(params);
+  };
 
   const handleFilterBySex = (value: string | null) => {
     const params = new URLSearchParams(searchParams);
@@ -62,32 +62,32 @@ export const PeoplePage = () => {
     setSearchParams(params);
   };
 
-  const filteredPeople = people.filter(person =>
-    person.name.toLowerCase().includes(query.toLowerCase()) ||
-    person.fatherName?.toLowerCase().includes(query.toLowerCase()) ||
-    person.motherName?.toLowerCase().includes(query.toLowerCase())
+  const filteredPeople = people.filter(
+    person =>
+      person.name.toLowerCase().includes(query.toLowerCase()) ||
+      person.fatherName?.toLowerCase().includes(query.toLowerCase()) ||
+      person.motherName?.toLowerCase().includes(query.toLowerCase()),
   );
 
   return (
     <>
       <h1 className="title">People Page</h1>
 
-        {isLoading && <Loader />}
+      {isLoading && <Loader />}
       <div className="block">
-
-         <div className="columns is-desktop is-flex-direction-row-reverse">
+        <div className="columns is-desktop is-flex-direction-row-reverse">
           <div className="column is-7-tablet is-narrow-desktop">
-            {!isLoading && !error && people.length > 0 &&
-            <PeopleFilters
-              query={query}
-              handleFilterByQuery={handleFilterByQuery}
-              handleFilterBySex={handleFilterBySex}
-            />}
+            {!isLoading && !error && people.length > 0 && (
+              <PeopleFilters
+                query={query}
+                handleFilterByQuery={handleFilterByQuery}
+                handleFilterBySex={handleFilterBySex}
+              />
+            )}
           </div>
 
           <div className="column">
             <div className="box table-container">
-
               {error && (
                 <p data-cy="peopleLoadingError" className="has-text-danger">
                   Something went wrong
@@ -95,7 +95,9 @@ export const PeoplePage = () => {
               )}
 
               {!isLoading && !error && people.length === 0 && (
-                <p data-cy="noPeopleMessage">There are no people on the server</p>
+                <p data-cy="noPeopleMessage">
+                  There are no people on the server
+                </p>
               )}
 
               {/* <p>There are no people matching the current search criteria</p> */}
