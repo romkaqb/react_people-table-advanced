@@ -71,7 +71,7 @@ export const PeopleFilters: React.FC<Props> = ({
       <div className="panel-block">
         <div className="level is-flex-grow-1 is-mobile" data-cy="CenturyFilter">
           <div className="level-left">
-            {[16,17,18,19,20].map(century => (
+            {[16, 17, 18, 19, 20].map(century => (
               <button
                 data-cy="century"
                 key={century}
@@ -89,8 +89,8 @@ export const PeopleFilters: React.FC<Props> = ({
             <button
               data-cy="centuryALL"
               onClick={handleClearCenturies}
-              className={classNames("button is-success", {
-                "is-outlined" : centuries.length,
+              className={classNames('button is-success', {
+                'is-outlined': centuries.length,
               })}
             >
               All

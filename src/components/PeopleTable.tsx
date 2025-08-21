@@ -7,7 +7,7 @@ import { PersonLink } from './PersonLink';
 
 type Props = {
   people: Person[];
-  handleSort: (field: string) => void
+  handleSort: (field: string) => void;
 };
 
 export const PeopleTable: React.FC<Props> = ({ people, handleSort }) => {
@@ -23,48 +23,36 @@ export const PeopleTable: React.FC<Props> = ({ people, handleSort }) => {
           <th>
             <span className="is-flex is-flex-wrap-nowrap">
               Name
-                <span className="icon">
-                  <i
-                    onClick={() => handleSort('name')}
-                    className="fas fa-sort"
-                  />
-                </span>
+              <span className="icon">
+                <i onClick={() => handleSort('name')} className="fas fa-sort" />
+              </span>
             </span>
           </th>
 
           <th>
             <span className="is-flex is-flex-wrap-nowrap">
               Sex
-                <span className="icon">
-                  <i
-                    onClick={() => handleSort('sex')}
-                    className="fas fa-sort"
-                  />
-                </span>
+              <span className="icon">
+                <i onClick={() => handleSort('sex')} className="fas fa-sort" />
+              </span>
             </span>
           </th>
 
           <th>
             <span className="is-flex is-flex-wrap-nowrap">
               Born
-                <span className="icon">
-                  <i
-                    onClick={() => handleSort('born')}
-                    className="fas fa-sort"
-                  />
-                </span>
+              <span className="icon">
+                <i onClick={() => handleSort('born')} className="fas fa-sort" />
+              </span>
             </span>
           </th>
 
           <th>
             <span className="is-flex is-flex-wrap-nowrap">
               Died
-                <span className="icon">
-                 <i
-                    onClick={() => handleSort('died')}
-                    className="fas fa-sort"
-                  />
-                </span>
+              <span className="icon">
+                <i onClick={() => handleSort('died')} className="fas fa-sort" />
+              </span>
             </span>
           </th>
 

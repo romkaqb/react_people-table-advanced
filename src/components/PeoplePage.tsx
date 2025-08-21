@@ -65,24 +65,26 @@ export const PeoplePage = () => {
     const params = new URLSearchParams(searchParams);
 
     const newCenturies = centuries.includes(ch)
-      ?  centuries.filter(century => century !== ch)
-      :  [...centuries, ch];
+      ? centuries.filter(century => century !== ch)
+      : [...centuries, ch];
 
-      params.delete('centuries');
+    params.delete('centuries');
 
-      newCenturies.forEach(century => params.append('centuries', century))
+    newCenturies.forEach(century => params.append('centuries', century));
 
     setSearchParams(params);
   };
 
   const handleClearCenturies = () => {
     const params = new URLSearchParams(searchParams);
+
     params.delete('centuries');
     setSearchParams(params);
   };
 
-  const handleClearAllFilters= () => {
+  const handleClearAllFilters = () => {
     const params = new URLSearchParams(searchParams);
+
     params.delete('centuries');
     params.delete('sex');
     params.delete('query');
@@ -91,42 +93,42 @@ export const PeoplePage = () => {
 
   const handleSort = (field: string) => {
     const params = new URLSearchParams(searchParams);
-    const currentSort = params.get("sort");
-    const currentOrder = params.get("order");
+    const currentSort = params.get('sort');
+    const currentOrder = params.get('order');
 
     if (currentSort !== field) {
-      params.set("sort", field);
-      params.delete("order");
-    } else if (currentOrder !== "desc") {
-      params.set("order", "desc");
+      params.set('sort', field);
+      params.delete('order');
+    } else if (currentOrder !== 'desc') {
+      params.set('order', 'desc');
     } else {
-      params.delete("sort");
-      params.delete("order");
+      params.delete('sort');
+      params.delete('order');
     }
 
     setSearchParams(params);
   };
 
   const filteredPeople = people.filter(person => {
-      const filteredByQuery =
+    const filteredByQuery =
       person.name.toLowerCase().includes(query.toLowerCase()) ||
       person.fatherName?.toLowerCase().includes(query.toLowerCase()) ||
-      person.motherName?.toLowerCase().includes(query.toLowerCase())
+      person.motherName?.toLowerCase().includes(query.toLowerCase());
 
-      const sexFilter = searchParams.get('sex')
-      const filteredBySex = sexFilter ? person.sex === sexFilter : true
+    const sexFilter = searchParams.get('sex');
+    const filteredBySex = sexFilter ? person.sex === sexFilter : true;
 
-      const personCenturyFilter = Math.ceil(person.born / 100)
-      const filteredByCenturies = centuries.length
-        ? centuries.includes(personCenturyFilter.toString())
-        : true;
+    const personCenturyFilter = Math.ceil(person.born / 100);
+    const filteredByCenturies = centuries.length
+      ? centuries.includes(personCenturyFilter.toString())
+      : true;
 
-      return filteredByQuery && filteredBySex && filteredByCenturies;
+    return filteredByQuery && filteredBySex && filteredByCenturies;
   });
 
   const sortedPeople = React.useMemo(() => {
-    const sortField = searchParams.get("sort");
-    const order = searchParams.get("order") === "desc" ? -1 : 1;
+    const sortField = searchParams.get('sort');
+    const order = searchParams.get('order') === 'desc' ? -1 : 1;
 
     if (!sortField) {
       return filteredPeople;
@@ -134,13 +136,13 @@ export const PeoplePage = () => {
 
     return [...filteredPeople].sort((a, b) => {
       switch (sortField) {
-        case "name":
+        case 'name':
           return a.name.localeCompare(b.name) * order;
-        case "sex":
+        case 'sex':
           return a.sex.localeCompare(b.sex) * order;
-        case "born":
+        case 'born':
           return (a.born - b.born) * order;
-        case "died":
+        case 'died':
           return (a.died - b.died) * order;
         default:
           return 0;
@@ -188,7 +190,7 @@ export const PeoplePage = () => {
               {/* <p>There are no people matching the current search criteria</p> */}
 
               {!isLoading && !error && people.length > 0 && (
-                <PeopleTable people={sortedPeople} handleSort={handleSort}/>
+                <PeopleTable people={sortedPeople} handleSort={handleSort} />
               )}
             </div>
           </div>
